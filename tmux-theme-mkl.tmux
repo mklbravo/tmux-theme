@@ -12,9 +12,6 @@ secondary="colour6"  # Secondary info
 success="colour2"    # Success states
 tertiary="colour3"   # Tertiary info
 
-# ── Special characters ────────────────────────────────────
-sep="█"
-
 colorize() {
   local bg_name="${1:-background}"
   local fg_name="${2:-foreground}"
@@ -47,6 +44,22 @@ prefix_block() {
   echo "${prefix_style} #{?client_prefix,,󰮭} "
 }
 
+session_block() {
+  echo "$(colorize accent muted)$(colorize accent background)  #{session_name} "
+}
+
+directory_block() {
+  echo "$(colorize secondary background)  #{b:pane_current_path} $(colorize muted secondary)"
+}
+
+host_block() {
+  echo "$(colorize background foreground)󰍹 #h "
+}
+
+user_block() {
+  echo "$(colorize default background)$(colorize background foreground)  #{USER} $(colorize background tertiary) "
+}
+
 main() {
   # ── Window Status ────────────────────────────────────────────────────────────
   tmux set-window-option -gq window-status-separator " "
@@ -62,14 +75,7 @@ main() {
   configure_window_list
 
   # ── Status right: session | user@host | directory ─────────────────────────
-  local m_session m_userhost m_dir m_date
-
-  m_session="$(colorize highlight background)  #{session_name} "
-  m_userhost="#[bg=${accent},fg=${secondary}]${sep}#[bg=${secondary},fg=${background}]  #{USER}@#h "
-  m_dir="#[bg=${secondary},fg=${tertiary}]${sep}#[bg=${tertiary},fg=${background}]  #{b:pane_current_path} #[bg=${background},fg=${tertiary}]${sep}"
-  m_date="#[bg=${tertiary},fg=${accent}]${sep}#[bg=${accent},fg=${background}]  %Y-%m-%d %H:%M:%S "
-
-  tmux set-option -gq status-right "${m_session}${m_userhost}${m_dir}${m_date}"
+  tmux set-option -gq status-right "$(user_block)$(host_block)$(directory_block)$(session_block)"
 
   # ── Pane borders ──────────────────────────────────────────────────────────
   tmux set-option -gq pane-border-style "fg=${muted}"

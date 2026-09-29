@@ -72,8 +72,6 @@ main() {
   # tmux set-option -gq status-right-length 300
   tmux set-option -gq status-left "$(prefix_block)"
 
-  configure_window_list
-
   # ── Status right: session | user@host | directory ─────────────────────────
   tmux set-option -gq status-right "$(user_block)$(host_block)$(directory_block)$(session_block)"
 

@@ -67,7 +67,7 @@ main() {
   tmux set-window-option -gq window-status-format "$(window_status_format)"
   # ── Right Status Bar ────────────────────────────────────────────────────────────
   tmux set-option -gq status "on"
-  tmux set-option -gq status-style "bg=colour1,fg=${foreground}"
+  tmux set-option -gq status-style "bg=${background},fg=${foreground}"
   # tmux set-option -gq status-left-length 200
   # tmux set-option -gq status-right-length 300
   tmux set-option -gq status-left "$(prefix_block)"

@@ -68,11 +68,10 @@ main() {
   tmux set-window-option -gq window-status-current-format "$(window_status_current_format)"
   tmux set-window-option -gq window-status-format "$(window_status_format)"
   # ── Status Bar ────────────────────────────────────────────────────────────────
-  tmux set-option -gq status "on"
+  tmux set-option -gq status 1
   tmux set-option -gq status-style "bg=${background},fg=${foreground}"
   tmux set-option -gq status-left-length 20
   tmux set-option -gq status-right-length 150
-  tmux set-option -gq status-format[1] "#[bg=${background}]"
   tmux set-option -gq status-left "$(prefix_block)"
 
   # ── Status right: session | user@host | directory ─────────────────────────

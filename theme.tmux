@@ -63,13 +63,16 @@ user_block() {
 main() {
   # ── Window Status ────────────────────────────────────────────────────────────
   tmux set-window-option -gq window-status-separator " "
+  tmux set-window-option -gq window-status-style "default"
+  tmux set-window-option -gq window-status-current-style "default"
   tmux set-window-option -gq window-status-current-format "$(window_status_current_format)"
   tmux set-window-option -gq window-status-format "$(window_status_format)"
-  # ── Right Status Bar ────────────────────────────────────────────────────────────
+  # ── Status Bar ────────────────────────────────────────────────────────────────
   tmux set-option -gq status "on"
   tmux set-option -gq status-style "bg=${background},fg=${foreground}"
-  # tmux set-option -gq status-left-length 200
-  # tmux set-option -gq status-right-length 300
+  tmux set-option -gq status-left-length 20
+  tmux set-option -gq status-right-length 150
+  tmux set-option -gq status-format[1] "#[bg=${background}]"
   tmux set-option -gq status-left "$(prefix_block)"
 
   # ── Status right: session | user@host | directory ─────────────────────────
